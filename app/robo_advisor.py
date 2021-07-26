@@ -1,8 +1,9 @@
 # this is the "app/robo_advisor.py" file
 
 import requests
-
+import csv
 import json
+from pandas import DataFrame
 
 # 
 # Inputs
@@ -77,5 +78,11 @@ print("-------------------------")
 print("RECOMMENDATION: BUY!")
 print("RECOMMENDATION REASON: TODO")
 print("-------------------------")
+print("WRITING DATA TO CSV...")
+print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
+
+df = DataFrame(tsd)
+print(df.columns)
+print(df)
