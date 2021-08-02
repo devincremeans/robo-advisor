@@ -5,8 +5,6 @@ import requests
 import csv
 import json
 from pandas import DataFrame
- 
-
 
 import os
 from dotenv import load_dotenv
@@ -107,7 +105,11 @@ print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
 
+for date in dates:
+    daily_prices = tsd[date]
+
 # Pandas
-# df = DataFrame(tsd)
+df = DataFrame(tsd)
 # print(df.columns)
-# print(df)
+print(df)
+df.to_csv(f'/Users/devincremeans/Documents/GitHub/robo-advisor/data_{datetime.datetime.now()}.csv')
