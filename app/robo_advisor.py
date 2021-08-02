@@ -114,10 +114,9 @@ for date in dates:
 # d = {'1. open','2. high', '3. low', '4. close'}
 df = DataFrame(tsd)
 dft = df.transpose()
-print(dft)
+
 dft.rename(columns = {' ':'Timestamp', '1. open':'Open', '2. high':'High', '3. low':'Low','4. close':'Close', '6. volume':'Volume'}, inplace=True)
 dft = dft.rename_axis("Timestamp")
 print(dft)
-
 
 dft.to_csv(f'/Users/devincremeans/Documents/GitHub/robo-advisor/data_{datetime.datetime.now()}.csv')
