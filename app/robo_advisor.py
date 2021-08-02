@@ -1,9 +1,18 @@
 # this is the "app/robo_advisor.py" file
 
+import datetime
 import requests
 import csv
 import json
 from pandas import DataFrame
+ 
+
+
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # 
 # Inputs
@@ -21,7 +30,14 @@ def to_usd(my_price):
     """
     return f"${my_price:,.2f}" #> $12,000.71
 
-request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo"
+api_key = os.getenv("ALPHAVANTAGE_API_KEY") 
+
+symbol = input("Please input a stock symbol: ")
+symbol = symbol.upper()
+
+request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&apikey=demo"
+
+request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={symbol}&apikey={api_key}"
 response = requests.get(request_url)
 # print(type(response)) # <class 'requests.models.Response'>
 # print(response.status_code) # 200
@@ -59,16 +75,17 @@ recent_low = min(low_prices)
 
 # breakpoint()
 
+datetime.datetime.now()
 
 # 
 # Info Outputs 
 # 
 
 print("-------------------------")
-print("SELECTED SYMBOL: XYZ")
+print(f"SELECTED SYMBOL: {symbol}")
 print("-------------------------")
 print("REQUESTING STOCK MARKET DATA...")
-print("REQUEST AT: 2018-02-20 02:00pm")
+print("REQUEST AT:", datetime.datetime.now()) # https://docs.python.org/3/library/datetime.html
 print("-------------------------")
 print(f"LATEST DAY: {last_refreshed}")
 print(f"LATEST CLOSE: {to_usd(float(latest_closing_price))}")
@@ -76,13 +93,14 @@ print(f"RECENT HIGH: {to_usd(float(recent_high))}")
 print(f"RECENT LOW: {to_usd(float(recent_low))}")
 print("-------------------------")
 print("RECOMMENDATION: BUY!")
-print("RECOMMENDATION REASON: TODO")
+print("RECOMMENDATION REASON: Because the robot says so!")
 print("-------------------------")
 print("WRITING DATA TO CSV...")
 print("-------------------------")
 print("HAPPY INVESTING!")
 print("-------------------------")
 
-df = DataFrame(tsd)
-print(df.columns)
-print(df)
+# Pandas
+# df = DataFrame(tsd)
+# print(df.columns)
+# print(df)
