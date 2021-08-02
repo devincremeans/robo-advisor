@@ -78,6 +78,7 @@ recent_high = max(high_prices)
 recent_low = min(low_prices)
 
 
+
 # breakpoint()
 
 datetime.datetime.now()
@@ -85,6 +86,17 @@ datetime.datetime.now()
 # 
 # Info Outputs 
 # 
+x = float(latest_closing_price)
+y = float(recent_high)
+
+ 
+if x < y:
+    b = "You have Diamond Hands, buy that dip!"
+    r = "Becuase Roaring Kitty says so!"
+else:
+    b = "The ride to the moon was fun... It's time to sell now"
+    r = "Time to cash in with all your Reddit analysts at WSB"     
+
 
 print("-------------------------")
 print(f"SELECTED SYMBOL: {symbol}")
@@ -97,8 +109,8 @@ print(f"LATEST CLOSE: {to_usd(float(latest_closing_price))}")
 print(f"RECENT HIGH: {to_usd(float(recent_high))}")
 print(f"RECENT LOW: {to_usd(float(recent_low))}")
 print("-------------------------")
-print("RECOMMENDATION: BUY!")
-print("RECOMMENDATION REASON: Because the robot says so!")
+print(f"RECOMMENDATION: {(b)}")
+print(f"RECOMMENDATION REASON: {(r)}")
 print("-------------------------")
 print("WRITING DATA TO CSV...")
 print("-------------------------")
