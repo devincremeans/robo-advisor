@@ -40,7 +40,7 @@ elif len(symbol) > 5:
     sys.exit("Opps! Too many characters. Run the app and try again")
 
 
-request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&apikey=demo"
+# request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&apikey=demo"
 
 request_url = f"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol={symbol}&apikey={api_key}"
 response = requests.get(request_url)
@@ -109,7 +109,15 @@ for date in dates:
     daily_prices = tsd[date]
 
 # Pandas
+# print(tsd)
+# breakpoint()
+# d = {'1. open','2. high', '3. low', '4. close'}
 df = DataFrame(tsd)
-# print(df.columns)
-print(df)
-df.to_csv(f'/Users/devincremeans/Documents/GitHub/robo-advisor/data_{datetime.datetime.now()}.csv')
+dft = df.transpose()
+print(dft)
+dft.rename(columns = {' ':'Timestamp', '1. open':'Open', '2. high':'High', '3. low':'Low','4. close':'Close', '6. volume':'Volume'}, inplace=True)
+dft = dft.rename_axis("Timestamp")
+print(dft)
+
+
+dft.to_csv(f'/Users/devincremeans/Documents/GitHub/robo-advisor/data_{datetime.datetime.now()}.csv')
