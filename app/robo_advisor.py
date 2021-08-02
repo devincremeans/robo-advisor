@@ -13,6 +13,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+import re
+import sys 
 
 # 
 # Inputs
@@ -34,6 +36,11 @@ api_key = os.getenv("ALPHAVANTAGE_API_KEY")
 
 symbol = input("Please input a stock symbol: ")
 symbol = symbol.upper()
+if not re.match("^[A-Z]*$", symbol):
+    sys.exit("Error! Expecting a properly-formed stock symbol like 'MSFT'. Run the app and try again")
+elif len(symbol) > 5:
+    sys.exit("Opps! Too many characters. Run the app and try again")
+
 
 request_url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&apikey=demo"
 
